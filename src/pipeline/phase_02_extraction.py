@@ -40,7 +40,7 @@ def count_records(url: str, format_type: str) -> int:
             
             if isinstance(data, list):
                 count = len(data)
-            elif isinstance(data, dict):
+            elif isinstance(data, dict): # TODO: Revisar esta parte, formatos de los datos cuando venga de un JSON.
                 # Caso común en CKAN (datastore_search) o GeoJSON
                 if "result" in data and "records" in data["result"]:
                     count = len(data["result"]["records"])
@@ -143,6 +143,7 @@ def run_extraction():
                 # Procesar Recursos
                 for res_info in ds_info["resources"]:
                     resource = db.query(Resource).filter_by(id=res_info["id"]).first()
+                    # TODO: Añadir el conteo de los formatos diferentes para el dataset.
                     if not resource:
                         resource = Resource(
                             id=res_info["id"],

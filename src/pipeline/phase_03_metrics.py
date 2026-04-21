@@ -95,6 +95,8 @@ def calculate_metrics():
         summary.freshness_score_a = a
         summary.global_score = global_score
         summary.calculated_at = datetime.datetime.now()
+        # TODO: Añadir número total de recursos
+        # TODO: Añadir número de formatos reutilizables
         
     db.commit()
     db.close()
