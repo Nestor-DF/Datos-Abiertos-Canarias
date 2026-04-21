@@ -1,6 +1,12 @@
+# Reiniciar
 sudo docker compose down -v && sudo docker compose up -d db
 rm -f execution_state.json
 source venv/bin/activate && PYTHONPATH=. python src/main.py
+
+# Reporte
+source venv/bin/activate && PYTHONPATH=. python src/pipeline/phase_03_metrics.py
+source venv/bin/activate && PYTHONPATH=. python src/pipeline/phase_04_visualization.py
+
 
 
 # CKAN – Guía básica de uso
