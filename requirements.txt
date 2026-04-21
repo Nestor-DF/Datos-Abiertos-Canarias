@@ -1,0 +1,7 @@
+requests
+SQLAlchemy
+psycopg2-binary
+pandas
+python-dotenv
+Jinja2
+alembic

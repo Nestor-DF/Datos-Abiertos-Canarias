@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER:-nestor}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-canarias}
+      POSTGRES_DB: ${DB_NAME:-datos_canarias}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-nestor} -d ${DB_NAME:-datos_canarias}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - DB_HOST=db
+      - DB_USER=${DB_USER:-nestor}
+      - DB_PASSWORD=${DB_PASSWORD:-canarias}
+      - DB_NAME=${DB_NAME:-datos_canarias}
+      - DB_PORT=5432
+      - DEBUG_MODE=True
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

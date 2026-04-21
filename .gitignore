@@ -1,0 +1,22 @@
+# Entornos Virtuales
+venv/
+env/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Logs y estado de ejecución automáticos
+execution_state.json
+data/
+*.log
+
+# IDEs
+.vscode/
+.idea/
+
+# Sistema Operativo
+.DS_Store
