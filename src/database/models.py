@@ -3,6 +3,12 @@ from sqlalchemy.orm import relationship
 import datetime
 from src.database.connection import Base
 
+# TODO 1: Cambiar el modelo dataset (y la lógica del código en la fase de extracción) para que guarde el contenido completo
+# de este, los datasets están asociados a una fuente y cada dataset tiene uno o varios recursos (archivos o endpoints)
+# guardar solo el contenido de la última versión del dataset (recurso más actualizado o eso es lo que entiendo)
+
+# TODO 2: Añadir número total de recursos y número total de formatos reutilizables por fuente y dataset
+
 class Source(Base):
     __tablename__ = "sources"
     id = Column(String, primary_key=True, index=True)

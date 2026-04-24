@@ -9,7 +9,7 @@ Utiliza orquestación en contenedores y PostgreSQL para medir la *frescura*, *vo
 - Docker y Docker Compose instalados (`sudo apt install docker-compose` o plugin de `docker compose`).
 - (Opcional): Python 3.10+ para ejecución local.
 
-## 🚀 Puesta en marcha rápida (Docker Integrado)
+## Puesta en marcha rápida (Docker Integrado)
 
 1. **Configurar el entorno:**
    Copia el archivo de configuración de ejemplo y ajústalo si fuese necesario (especialmente útil configurar el `MAX_RECORDS_DOWNLOAD=1000` si quieres acotar la velocidad):
@@ -31,7 +31,7 @@ Utiliza orquestación en contenedores y PostgreSQL para medir la *frescura*, *vo
 
 El archivo final auto-contenido aparecerá en la ruta `data/report.html`.
 
-## 💻 Ejecución local sin el contenedor App
+## Ejecución local sin el contenedor App
 
 Si tu servicio de Docker se encuentra tras un firewall estricto o un error temporal de red te impide usar la imagen `python:slim`, puedes levantar únicamente la Base de Datos y ejecutar el pipeline localmente:
 
@@ -50,7 +50,7 @@ Si tu servicio de Docker se encuentra tras un firewall estricto o un error tempo
    PYTHONPATH=. python src/main.py
    ```
 
-## 🛠️ Resiliencia y Control de Ejecución
+## Resiliencia y Control de Ejecución
 La aplicación está diseñada para retener el progreso (_checkpointing_). Si necesitas paralizar una descarga masiva (`Ctrl+C`), el sistema guardará su estado en el archivo `execution_state.json`.
 
 Si deseas relanzar la recolección desde 0, primero debes vaciar este caché y resetear la Base de Datos:

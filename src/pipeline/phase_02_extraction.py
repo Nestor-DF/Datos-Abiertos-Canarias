@@ -143,7 +143,7 @@ def run_extraction():
                 # Procesar Recursos
                 for res_info in ds_info["resources"]:
                     resource = db.query(Resource).filter_by(id=res_info["id"]).first()
-                    # TODO: Añadir el conteo de los formatos diferentes para el dataset.
+                    # TODO 2: Añadir el conteo de formatos diferentes y total de recursos por fuente y dataset
                     if not resource:
                         resource = Resource(
                             id=res_info["id"],

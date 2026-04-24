@@ -88,6 +88,7 @@ def calculate_metrics():
             summary = SummaryMetrics(source_id=src_id)
             db.add(summary)
             
+        # Esto son métricas de una fuente
         summary.volume_datasets = v
         summary.total_records = r
         summary.normalized_v = norm_v
@@ -95,8 +96,8 @@ def calculate_metrics():
         summary.freshness_score_a = a
         summary.global_score = global_score
         summary.calculated_at = datetime.datetime.now()
-        # TODO: Añadir número total de recursos
-        # TODO: Añadir número de formatos reutilizables
+        # TODO 2: Añadir número total de recursos
+        # TODO 2: Añadir número total de formatos reutilizables
         
     db.commit()
     db.close()
