@@ -1,6 +1,7 @@
 import logging
 import time
 from src.database.connection import engine, Base
+from src.database.audit import log_database_status
 from src.pipeline.phase_02_extraction import run_extraction
 from src.pipeline.phase_03_metrics import calculate_metrics
 from src.pipeline.phase_04_visualization import generate_report
@@ -12,6 +13,9 @@ def main():
     
     # Asegurar base de datos y esquema
     Base.metadata.create_all(bind=engine)
+
+    # Mostrar estado inicial de la base de datos
+    log_database_status()
     
     # Fase 1 y Fase 2: Extracción y recuento
     logging.info("--- Comenzando Extracción de Datos (Fase 1 y 2) ---")
