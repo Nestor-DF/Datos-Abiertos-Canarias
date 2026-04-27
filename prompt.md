@@ -51,6 +51,10 @@ Tipo: Ayuntamiento
 API: http://apidatosabiertos.laspalmasgc.es/api/3/action/package_list
 DCAT: http://apidatosabiertos.laspalmasgc.es/dcat.json (No funciona, no tenemos permisos)
 
+9. Parlamento de Canarias: https://datos.parcan.es
+Tipo: Portal especializado
+API: https://parcan.es/api/
+
 La arquitectura debe ser extensible para añadir más fuentes sin romper el diseño. Incluso si sus APIs no están basadas en CKAN.
 
 ## Objetivo funcional
