@@ -71,7 +71,7 @@ SOURCES = [
     {
         "id": "parcan",
         "name": "Parlamento de Canarias",
-        "url": "https://datos.parcan.es/dataset",
+        "url": "https://datos.parcan.es",
         "type": "Especializado"
     }
 ]
