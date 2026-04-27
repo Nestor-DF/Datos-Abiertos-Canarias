@@ -43,11 +43,23 @@ class CkanExtractor(BaseExtractor):
                 
                 resources = []
                 for res in result.get("resources", []):
+                    # Parsear fecha de última modificación del recurso
+                    res_modified_str = res.get("last_modified") or res.get("metadata_modified")
+                    res_last_modified = None
+                    if res_modified_str:
+                        try:
+                            res_last_modified = datetime.datetime.fromisoformat(
+                                res_modified_str.replace("Z", "+00:00")
+                            ).replace(tzinfo=None)
+                        except ValueError:
+                            pass
+
                     resources.append({
                         "id": res.get("id"),
                         "title": res.get("name") or res.get("id"),
                         "format": res.get("format", "").upper(),
-                        "url": res.get("url")
+                        "url": res.get("url"),
+                        "last_modified": res_last_modified,
                     })
                 
                 return {

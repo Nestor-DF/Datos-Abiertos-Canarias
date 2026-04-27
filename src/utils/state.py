@@ -28,6 +28,22 @@ class CheckpointManager:
     def is_dataset_processed(self, dataset_id):
         return dataset_id in self.state["processed_datasets"]
 
+    def mark_dataset_content_checked(self, dataset_id):
+        """Marca que el contenido de este dataset ya fue comprobado en esta ejecución."""
+        checked = self.state.setdefault("content_checked_datasets", [])
+        if dataset_id not in checked:
+            checked.append(dataset_id)
+            self.save()
+
+    def is_dataset_content_checked(self, dataset_id):
+        """Devuelve True si el contenido ya fue comprobado en esta ejecución."""
+        return dataset_id in self.state.get("content_checked_datasets", [])
+
+    def reset_content_checked(self):
+        """Limpia la lista de datasets con contenido comprobado (llamar al inicio de cada ejecución)."""
+        self.state["content_checked_datasets"] = []
+        self.save()
+
     def set_current_source(self, source_id):
         if self.state["current_source"] != source_id:
             self.state["current_source"] = source_id

@@ -1,6 +1,7 @@
 import logging
 import time
 from src.database.connection import engine, Base
+from src.database.models import DatasetContentMeta  # necesario para que Base registre la tabla
 from src.database.audit import log_database_status
 from src.pipeline.phase_02_extraction import run_extraction
 from src.pipeline.phase_03_metrics import calculate_metrics

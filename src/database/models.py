@@ -57,6 +57,21 @@ class SummaryMetrics(Base):
     
     source = relationship("Source", back_populates="summaries")
 
+class DatasetContentMeta(Base):
+    """
+    Registra qué datasets tienen tabla de contenido creada en la BD,
+    junto con la fecha del recurso que se usó para poblarla.
+    Permite saber si hay que actualizar (fecha más nueva) o saltar (misma fecha).
+    """
+    __tablename__ = "dataset_content_meta"
+    dataset_id = Column(String, ForeignKey("datasets.id"), primary_key=True)
+    resource_id = Column(String, nullable=False)          # recurso más reciente usado
+    resource_last_modified = Column(DateTime, nullable=True)  # fecha de ese recurso
+    table_name = Column(String, nullable=False)            # nombre real de la tabla en BD
+    row_count = Column(Integer, default=0)
+    created_at = Column(DateTime, default=datetime.datetime.now)
+    updated_at = Column(DateTime, default=datetime.datetime.now)
+
 class ExecutionLog(Base):
     __tablename__ = "execution_log"
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
