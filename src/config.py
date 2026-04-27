@@ -67,5 +67,11 @@ SOURCES = [
         "name": "Ayuntamiento de Las Palmas de Gran Canaria",
         "url": "http://apidatosabiertos.laspalmasgc.es",
         "type": "Ayuntamiento"
+    }, 
+    {
+        "id": "parcan",
+        "name": "Parlamento de Canarias",
+        "url": "https://datos.parcan.es/dataset",
+        "type": "Especializado"
     }
 ]
