@@ -20,12 +20,12 @@ MAX_RECORDS_DOWNLOAD = int(os.getenv("MAX_RECORDS_DOWNLOAD", "1000"))
 
 #Fuentes Hardcoded Iniciales
 SOURCES = [
-    {
-        "id": "gobcan",
-        "name": "Gobierno de Canarias",
-        "url": "https://datos.canarias.es/catalogos/general",
-        "type": "Especializado"
-    },
+    # {
+    #     "id": "gobcan",
+    #     "name": "Gobierno de Canarias",
+    #     "url": "https://datos.canarias.es/catalogos/general",
+    #     "type": "Especializado"
+    # },
     # {
     #     "id": "sitcan",
     #     "name": "SITCAN",
@@ -56,12 +56,12 @@ SOURCES = [
     #     "url": "https://datosabiertos.elhierro.es",
     #     "type": "Cabildo"
     # },
-    # {
-    #     "id": "fuerteventura",
-    #     "name": "Cabildo de Fuerteventura",
-    #     "url": "https://gobiernoabierto.cabildofuer.es/datosabiertos/catalogo",
-    #     "type": "Cabildo"
-    # },
+    {
+        "id": "fuerteventura",
+        "name": "Cabildo de Fuerteventura",
+        "url": "https://gobiernoabierto.cabildofuer.es/datosabiertos/catalogo",
+        "type": "Cabildo"
+    },
     # {
     #     "id": "lpgc",
     #     "name": "Ayuntamiento de Las Palmas de Gran Canaria",

@@ -18,7 +18,7 @@ def get_date_converter(db: Session, table_name: str):
         inspector = inspect(engine)
         columns = [col['name'] for col in inspector.get_columns(table_name)]
         # Inconveniente: Si una columna tiene parte de una keyword, se va interpretar como la columna escogida de manera errónea
-        keywords = ['fecha', 'date', 'año','anios', 'ano', 'anyo', 'mes', 'dia', 'trimestre', 'cuatrimestre', 'tiempo', 'time']
+        keywords = ['fecha', 'date', 'año','anios', 'ano', 'anyo', 'mes', 'dia', 'trimestre', 'cuatrimestre', 'tiempo', 'time', 'changed']
         date_col = None
         for col in columns:
             col_lower = col.lower()
@@ -105,12 +105,12 @@ def get_date_converter(db: Session, table_name: str):
         # Formato: ISO
         iso_regex = r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?$"
         if re.match(iso_regex, sample_str):
-            return lambda x: datetime.datetime.fromisoformat(x)
+            return lambda x: datetime.datetime.fromisoformat(x), date_col
 
         # Formato: UNIX timestamp
         try: 
-            datetime.datetime.fromtimestamp(float(sample_str))
-            return lambda x: datetime.datetime.fromtimestamp(float(x))
+            datetime.datetime.fromtimestamp(float(sample_str.replace("[", "").replace("]", "")))
+            return lambda x: datetime.datetime.fromtimestamp(float(x.replace("[", "").replace("]", ""))), date_col
         except:
             pass
 
