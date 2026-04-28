@@ -140,6 +140,11 @@ def download_resource_content(url: str, format_type: str) -> pd.DataFrame:
         re.sub(r"[^a-z0-9]", "_", str(c).lower().strip())[:60] or f"col_{i}"
         for i, c in enumerate(df.columns)
     ]
+    
+    # Convertir dicts/listas a string (JSON) para que psycopg2 pueda insertarlos en una columna TEXT
+    for col in df.columns:
+        df[col] = df[col].apply(lambda x: json.dumps(x, ensure_ascii=False) if isinstance(x, (dict, list)) else (str(x) if pd.notna(x) else None))
+        
     return df
 
 
