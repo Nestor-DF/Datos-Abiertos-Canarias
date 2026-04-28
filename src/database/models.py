@@ -25,7 +25,7 @@ class Dataset(Base):
     source_id = Column(String, ForeignKey("sources.id"))
     title = Column(String)
     last_updated = Column(DateTime)
-    
+
     source = relationship("Source", back_populates="datasets")
     resources = relationship("Resource", back_populates="dataset", cascade="all, delete")
 
@@ -36,7 +36,6 @@ class Resource(Base):
     title = Column(String)
     format = Column(String)
     url = Column(Text)
-    records_count = Column(Integer, default=0)
     
     dataset = relationship("Dataset", back_populates="resources")
 

@@ -22,69 +22,6 @@ def log_error(db: Session, source_id: str, message: str, dataset_id: str = None)
     db.add(error)
     db.commit()
 
-def count_records(url: str, format_type: str) -> int:
-    """Descarga el contenido de forma limitada y cuenta los registros."""
-    format_type = format_type.upper() if format_type else ""
-    
-    # Archivos no tabulares tendrán valor de 1 (una fila x una columna)
-    if format_type not in ["CSV", "JSON", "GEOJSON", "XLS", "XLSX"]:
-        return 1
-
-    try:
-        # Petición de descarga (usamos stream para no colapsar la memoria)
-        headers = {"User-Agent": "AuditorDatosabiertosCanarias/1.0"}
-        
-        # En caso de JSON usamos carga normal pero podemos capturar excepciones
-        if format_type in ["JSON", "GEOJSON"]:
-            response = requests.get(url, headers=headers, timeout=20)
-            response.raise_for_status()
-            data = response.json()
-            
-            if isinstance(data, list):
-                count = len(data)
-            elif isinstance(data, dict): # TODO: Revisar esta parte, formatos de los datos cuando venga de un JSON.
-                # Caso común en CKAN (datastore_search) o GeoJSON
-                if "result" in data and "records" in data["result"]:
-                    count = len(data["result"]["records"])
-                elif "features" in data:
-                    count = len(data["features"])
-                else:
-                    count = 1 # Json complejo
-            else:
-                count = 1
-                
-            return min(count, MAX_RECORDS_DOWNLOAD) if DEBUG_MODE else count
-
-        elif format_type in ["CSV", "TXT", "TSV"]:
-            response = requests.get(url, headers=headers, stream=True, timeout=20)
-            response.raise_for_status()
-            
-            count = 0
-            # Leer por líneas
-            for line in response.iter_lines():
-                if line:
-                    count += 1
-                # LÍMITE por configuración
-                if DEBUG_MODE and count >= MAX_RECORDS_DOWNLOAD:
-                    break
-            
-            # Restamos 1 por la cabecera, si count > 0
-            return max(1, count - 1)
-            
-        elif format_type in ["XLS", "XLSX"]:
-            # Excel no se puede stremear fácilmente con requests puro sin volcarlo,
-            # lo bajamos y contamos con pandas.
-            response = requests.get(url, headers=headers, timeout=20)
-            response.raise_for_status()
-            df = pd.read_excel(io.BytesIO(response.content))
-            count = len(df)
-            return min(count, MAX_RECORDS_DOWNLOAD) if DEBUG_MODE else count
-
-    except Exception as e:
-        # Fallo en la descarga (timeout, 404, etc.)
-        # Retornamos 0 para indicar que no se pudo acceder a los datos
-        logging.warning(f"Error count_records para {url}: {str(e)}")
-        return 0
 
 TABULAR_FORMATS = {"CSV", "TSV", "JSON", "GEOJSON", "XLS", "XLSX"}
 
@@ -304,9 +241,6 @@ def run_extraction():
                             )
                             db.add(resource)
 
-                        if res_info.get("url"):
-                            records = count_records(res_info["url"], res_info["format"])
-                            resource.records_count = records
 
                 # --- TODO 1: Guardar contenido del recurso más reciente ---
                 # Se ejecuta siempre (incluso si el dataset ya estaba procesado)
