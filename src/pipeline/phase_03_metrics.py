@@ -48,8 +48,8 @@ def calculate_metrics():
             nota_frescura = max(0.0, 100.0 - (dias_antiguedad / 730.0) * 100.0)
             
             # Registros del dataset
-            reg_ds = db.query(func.sum(Resource.records_count))\
-                       .filter(Resource.dataset_id == ds.id).scalar() or 0
+            reg_ds = db.query(DatasetContentMeta.row_count)\
+                       .filter(DatasetContentMeta.dataset_id == ds.id).scalar() or 0
                        
             sum_frescura_x_registros += nota_frescura * reg_ds
             
