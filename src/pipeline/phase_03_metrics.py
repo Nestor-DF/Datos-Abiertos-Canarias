@@ -3,7 +3,7 @@ import logging
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from src.database.connection import SessionLocal
-from src.database.models import Source, Dataset, Resource, SummaryMetrics
+from src.database.models import Source, Dataset, Resource, SummaryMetrics, DatasetContentMeta
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
@@ -24,9 +24,8 @@ def calculate_metrics():
     for src in sources:
         # V = Volumen (datasets totales)
         v = db.query(func.count(Dataset.id)).filter(Dataset.source_id == src.id).scalar() or 0
-        
-        # R = Registros (sumando de todos los recursos del source)
-        r = db.query(func.sum(Resource.records_count))\
+            
+        r = db.query(func.sum(DatasetContentMeta.row_count))\
               .join(Dataset)\
               .filter(Dataset.source_id == src.id).scalar() or 0
         
@@ -45,8 +44,8 @@ def calculate_metrics():
             nota_frescura = max(0.0, 100.0 - (dias_antiguedad / 730.0) * 100.0)
             
             # Registros del dataset
-            reg_ds = db.query(func.sum(Resource.records_count))\
-                       .filter(Resource.dataset_id == ds.id).scalar() or 0
+            reg_ds = db.query(DatasetContentMeta.row_count)\
+                       .filter(DatasetContentMeta.dataset_id == ds.id).scalar() or 0
                        
             sum_frescura_x_registros += nota_frescura * reg_ds
             
