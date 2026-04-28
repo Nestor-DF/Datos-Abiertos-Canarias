@@ -2,8 +2,10 @@ import jinja2
 import os
 import logging
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from src.database.connection import SessionLocal
 from src.database.models import Source, SummaryMetrics
+import datetime
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
@@ -17,11 +19,16 @@ def generate_report():
     
     data = []
     for sum_metric, source in summaries:
+        last_ingest_str = sum_metric.last_ingestion.strftime("%Y-%m-%d %H:%M") if sum_metric.last_ingestion else "N/A"
+
         data.append({
             "name": source.name,
             "type": source.type,
+            "last_ingestion": last_ingest_str,
             "v": sum_metric.volume_datasets,
             "r": sum_metric.total_records,
+            "total_resources": sum_metric.total_resources,
+            "reusable_formats": round(sum_metric.reusable_formats, 2),
             "norm_v": round(sum_metric.normalized_v, 2),
             "norm_r": round(sum_metric.normalized_r, 2),
             "a": round(sum_metric.freshness_score_a, 2),

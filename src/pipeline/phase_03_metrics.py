@@ -33,6 +33,10 @@ def calculate_metrics():
         datasets = db.query(Dataset).filter(Dataset.source_id == src.id).all()
         
         sum_frescura_x_registros = 0
+        total_resources_source = 0
+        reusable_formats_source = 0
+        source_last_ingestion = None
+        
         for ds in datasets:
             # Días de antigüedad, si falta: asumir 0
             if ds.last_updated:
@@ -44,8 +48,8 @@ def calculate_metrics():
             nota_frescura = max(0.0, 100.0 - (dias_antiguedad / 730.0) * 100.0)
             
             # Registros del dataset
-            reg_ds = db.query(DatasetContentMeta.row_count)\
-                       .filter(DatasetContentMeta.dataset_id == ds.id).scalar() or 0
+            reg_ds = db.query(func.sum(Resource.records_count))\
+                       .filter(Resource.dataset_id == ds.id).scalar() or 0
                        
             sum_frescura_x_registros += nota_frescura * reg_ds
             
@@ -53,11 +57,16 @@ def calculate_metrics():
         if r > 0:
             a_score = sum_frescura_x_registros / r
             
+        ratio_reusable = reusable_formats_source / len(datasets) if len(datasets) > 0 else 0.0
+            
         stats_per_source[src.id] = {
             "v": v,
             "r": r,
             "a": a_score,
-            "type": src.type
+            "type": src.type,
+            "total_resources": total_resources_source,
+            "reusable_formats": ratio_reusable,
+            "last_ingestion": source_last_ingestion
         }
         
         # Búsqueda de máximos
@@ -95,8 +104,9 @@ def calculate_metrics():
         summary.freshness_score_a = a
         summary.global_score = global_score
         summary.calculated_at = datetime.datetime.now()
-        # TODO 2: Añadir número total de recursos
-        # TODO 2: Añadir número total de formatos reutilizables
+        summary.total_resources = stats["total_resources"]
+        summary.reusable_formats = stats["reusable_formats"]
+        summary.last_ingestion = stats["last_ingestion"]
         
     db.commit()
     db.close()
