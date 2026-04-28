@@ -42,6 +42,13 @@
         p.subtitle {
             color: var(--text-muted);
             font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timestamp {
+            color: var(--accent-green);
+            font-size: 0.9rem;
+            font-weight: 500;
             margin-bottom: 3rem;
         }
 
@@ -128,7 +135,10 @@
                         <th>Institución</th>
                         <th>Tipo</th>
                         <th>Datasets (V)</th>
+                        <th>Recursos</th>
+                        <th>Media Formatos / Dataset</th>
                         <th>Registros (R)</th>
+                        <th>Última Ingesta</th>
                         <th>Actualización (A)</th>
                         <th>Puntuación Global</th>
                     </tr>
@@ -144,8 +154,17 @@
                             <div style="font-size: 0.75rem; color: #94a3b8;">Norm: {{ item.norm_v }}%</div>
                         </td>
                         <td>
+                            <div style="font-weight: 500;">{{ item.total_resources }}</div>
+                        </td>
+                        <td>
+                            <div style="font-weight: 500;">{{ item.reusable_formats }}</div>
+                        </td>
+                        <td>
                             <div>{{ item.r }}</div>
                             <div style="font-size: 0.75rem; color: #94a3b8;">Norm: {{ item.norm_r }}%</div>
+                        </td>
+                        <td>
+                            <div style="font-size: 0.85rem; color: #94a3b8;">{{ item.last_ingestion }}</div>
                         </td>
                         <td>
                             <div style="font-weight: 500;">{{ item.a }}%</div>

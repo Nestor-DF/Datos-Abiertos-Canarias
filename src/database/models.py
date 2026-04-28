@@ -25,6 +25,10 @@ class Dataset(Base):
     source_id = Column(String, ForeignKey("sources.id"))
     title = Column(String)
     last_updated = Column(DateTime)
+    total_resources = Column(Integer, default=0)
+    reusable_formats = Column(Integer, default=0)
+    available_formats = Column(String, nullable=True)
+    last_ingestion = Column(DateTime, nullable=True)
     
     source = relationship("Source", back_populates="datasets")
     resources = relationship("Resource", back_populates="dataset", cascade="all, delete")
@@ -48,6 +52,9 @@ class SummaryMetrics(Base):
     
     volume_datasets = Column(Integer, default=0)
     total_records = Column(Integer, default=0)
+    total_resources = Column(Integer, default=0)
+    reusable_formats = Column(Float, default=0.0)
+    last_ingestion = Column(DateTime, nullable=True)
     
     normalized_v = Column(Float, default=0.0)
     normalized_r = Column(Float, default=0.0)
