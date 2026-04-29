@@ -68,10 +68,10 @@ SOURCES = [
     #     "url": "http://apidatosabiertos.laspalmasgc.es",
     #     "type": "Ayuntamiento"
     # }, 
-    # {
-    #     "id": "parcan",
-    #     "name": "Parlamento de Canarias",
-    #     "url": "https://datos.parcan.es",
-    #     "type": "Especializado"
-    # }
+    {
+        "id": "parcan",
+        "name": "Parlamento de Canarias",
+        "url": "https://datos.parcan.es",
+        "type": "Especializado"
+    },
 ]
