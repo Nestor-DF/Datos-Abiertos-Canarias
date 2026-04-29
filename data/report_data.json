@@ -28,6 +28,20 @@
     "score": 86.33
   },
   {
+    "source_id": "sitcan",
+    "name": "SITCAN",
+    "type": "Especializado",
+    "last_ingestion": "2026-04-29 10:30",
+    "v": 167,
+    "r": 389050,
+    "total_resources": 48,
+    "reusable_formats": 0.06,
+    "norm_v": 100.0,
+    "norm_r": 100.0,
+    "a": 0.22,
+    "score": 60.09
+  },
+  {
     "source_id": "lapalma",
     "name": "Cabildo de La Palma",
     "type": "Cabildo",
