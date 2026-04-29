@@ -1,5 +1,19 @@
 [
   {
+    "source_id": "tenerife",
+    "name": "Cabildo de Tenerife",
+    "type": "Cabildo",
+    "last_ingestion": "2026-04-29 10:22",
+    "v": 283,
+    "r": 75598,
+    "total_resources": 5206,
+    "reusable_formats": 3.06,
+    "norm_v": 100.0,
+    "norm_r": 100.0,
+    "a": 73.88,
+    "score": 89.55
+  },
+  {
     "source_id": "istac",
     "name": "ISTAC",
     "type": "Especializado",
