@@ -42,6 +42,20 @@
     "score": 82.63
   },
   {
+    "source_id": "fuerteventura",
+    "name": "Cabildo de Fuerteventura",
+    "type": "Cabildo",
+    "last_ingestion": "2026-04-29 11:18",
+    "v": 78,
+    "r": 1196,
+    "total_resources": 58,
+    "reusable_formats": 0.67,
+    "norm_v": 100.0,
+    "norm_r": 100.0,
+    "a": 40.59,
+    "score": 76.24
+  },
+  {
     "source_id": "elhierro",
     "name": "Cabildo de El Hierro",
     "type": "Cabildo",
@@ -82,19 +96,5 @@
     "norm_r": 1.12,
     "a": 100.0,
     "score": 58.03
-  },
-  {
-    "source_id": "fuerteventura",
-    "name": "Cabildo de Fuerteventura",
-    "type": "Cabildo",
-    "last_ingestion": "2026-04-29 10:08",
-    "v": 78,
-    "r": 1349,
-    "total_resources": 59,
-    "reusable_formats": 0.68,
-    "norm_v": 100.0,
-    "norm_r": 0.34,
-    "a": 36.0,
-    "score": 44.5
   }
 ]
