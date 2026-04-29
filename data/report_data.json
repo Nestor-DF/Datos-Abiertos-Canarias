@@ -28,6 +28,20 @@
     "score": 86.33
   },
   {
+    "source_id": "parlamento_canarias",
+    "name": "Parlamento de Canarias",
+    "type": "Especializado",
+    "last_ingestion": "2026-04-28 22:44",
+    "v": 3950,
+    "r": 1004155,
+    "total_resources": 7316,
+    "reusable_formats": 1.85,
+    "norm_v": 100.0,
+    "norm_r": 100.0,
+    "a": 56.57,
+    "score": 82.63
+  },
+  {
     "source_id": "sitcan",
     "name": "SITCAN",
     "type": "Especializado",

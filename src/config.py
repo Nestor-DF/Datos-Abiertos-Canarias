@@ -38,12 +38,12 @@ SOURCES = [
     #     "url": "https://datos.canarias.es/catalogos/estadisticas",
     #     "type": "Especializado"
     # }
-    {
-        "id": "tenerife",
-        "name": "Cabildo de Tenerife",
-        "url": "https://datos.tenerife.es/ckan",
-        "type": "Cabildo"
-    },
+    # {
+    #     "id": "tenerife",
+    #     "name": "Cabildo de Tenerife",
+    #     "url": "https://datos.tenerife.es/ckan",
+    #     "type": "Cabildo"
+    # },
     #{
     #     "id": "lapalma",
     #     "name": "Cabildo de La Palma",
@@ -68,10 +68,10 @@ SOURCES = [
     #     "url": "http://apidatosabiertos.laspalmasgc.es",
     #     "type": "Ayuntamiento"
     # }, 
-    {
-        "id": "parcan",
-        "name": "Parlamento de Canarias",
-        "url": "https://datos.parcan.es",
-        "type": "Especializado"
-    },
+    # {
+    #     "id": "parcan",
+    #     "name": "Parlamento de Canarias",
+    #     "url": "https://datos.parcan.es",
+    #     "type": "Especializado"
+    # },
 ]
