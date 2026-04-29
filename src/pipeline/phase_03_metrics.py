@@ -138,8 +138,34 @@ def get_most_recent_date(db: Session, table_name: str):
         table = Table(table_name, metadata, autoload_with=engine)
         
         all_values = db.query(table.c[date_col]).all()
-        # Convertir todos los valores (all devuelve tuplas)
-        dates = [converter(str(v[0])) for v in all_values if v]
+
+        # Convertir todos los valores (all devuelve tuplas). No asumimos que
+        # todos los registros tengan exactamente el mismo formato que la muestra:
+        # algunos datasets mezclan valores como "2025" con otros formatos.
+        dates = []
+        for value_tuple in all_values:
+            if not value_tuple or value_tuple[0] is None:
+                continue
+
+            value = str(value_tuple[0]).strip()
+            if not value:
+                continue
+
+            try:
+                dates.append(converter(value))
+            except Exception:
+                # Fallback para años sueltos: "2025", "2018", etc.
+                if re.match(r"^\d{4}$", value):
+                    dates.append(datetime.datetime(int(value), 12, 31))
+                elif DEBUG_MODE:
+                    print(
+                        "No se pudo convertir el valor de fecha",
+                        value,
+                        "en la tabla",
+                        table_name,
+                        "columna",
+                        date_col,
+                    )
         
         return max(dates) if dates else None
 
@@ -188,7 +214,15 @@ def calculate_metrics():
             number_of_datasets += 1
             # Días de antigüedad, si falta: asumir 0
             most_recent_entry_datetime = get_most_recent_date(db, table_name)
-            if most_recent_entry_datetime != None:
+            if most_recent_entry_datetime is not None:
+                # Normalizar zona horaria antes de restar fechas.
+                # PostgreSQL/SQLAlchemy puede devolver timestamps con tzinfo,
+                # mientras que `now` es naive. Python no permite restarlos.
+                if most_recent_entry_datetime.tzinfo is not None and now.tzinfo is None:
+                    most_recent_entry_datetime = most_recent_entry_datetime.replace(tzinfo=None)
+                elif most_recent_entry_datetime.tzinfo is None and now.tzinfo is not None:
+                    now = now.replace(tzinfo=None)
+
                 dias_antiguedad = max(0, (now - most_recent_entry_datetime).days)
             else:
                 number_of_dates_not_found += 1

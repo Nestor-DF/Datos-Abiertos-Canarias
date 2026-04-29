@@ -32,12 +32,12 @@ SOURCES = [
     #     "url": "https://opendata.sitcan.es",
     #     "type": "Especializado"
     # },
-    # {
-    #     "id": "istac",
-    #     "name": "ISTAC",
-    #     "url": "https://datos.canarias.es/catalogos/estadisticas",
-    #     "type": "Especializado"
-    # },
+     {
+         "id": "istac",
+         "name": "ISTAC",
+         "url": "https://datos.canarias.es/catalogos/estadisticas",
+         "type": "Especializado"
+     }
     # {
     #     "id": "tenerife",
     #     "name": "Cabildo de Tenerife",
@@ -56,12 +56,12 @@ SOURCES = [
     #     "url": "https://datosabiertos.elhierro.es",
     #     "type": "Cabildo"
     # },
-    {
-        "id": "fuerteventura",
-        "name": "Cabildo de Fuerteventura",
-        "url": "https://gobiernoabierto.cabildofuer.es/datosabiertos/catalogo",
-        "type": "Cabildo"
-    },
+    # {
+    #     "id": "fuerteventura",
+    #     "name": "Cabildo de Fuerteventura",
+    #     "url": "https://gobiernoabierto.cabildofuer.es/datosabiertos/catalogo",
+    #     "type": "Cabildo"
+    # },
     # {
     #     "id": "lpgc",
     #     "name": "Ayuntamiento de Las Palmas de Gran Canaria",

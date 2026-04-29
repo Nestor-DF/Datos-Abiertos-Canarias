@@ -1,5 +1,15 @@
+import os
+import sys
+
+# Permite ejecutar este archivo tanto como módulo (`python -m src.main`)
+# como directamente (`python src/main.py` o `/app/src/main.py`).
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 import logging
 import time
+from sqlalchemy.exc import SQLAlchemyError
 from src.database.connection import engine, Base
 from src.database.models import DatasetContentMeta  # necesario para que Base registre la tabla
 from src.database.audit import log_database_status
@@ -15,8 +25,18 @@ def main():
     # Asegurar base de datos y esquema
     Base.metadata.create_all(bind=engine)
 
-    # Mostrar estado inicial de la base de datos
-    log_database_status()
+    # Mostrar estado inicial de la base de datos.
+    # Si la BD contiene miles de tablas dinámicas, la inspección completa puede
+    # superar los límites de memoria compartida de PostgreSQL. En ese caso,
+    # registramos el fallo y continuamos con la ejecución.
+    try:
+        log_database_status()
+    except SQLAlchemyError as exc:
+        logging.warning(
+            "No se pudo completar la auditoría inicial de la base de datos. "
+            "La ejecución continuará igualmente. Detalle: %s",
+            exc,
+        )
     
     # Fase 1 y Fase 2: Extracción y recuento
     logging.info("--- Comenzando Extracción de Datos (Fase 1 y 2) ---")

@@ -121,6 +121,16 @@ def save_dataset_content(db: Session, dataset_id: str, resource: dict) -> int:
         logging.warning(f"[{dataset_id}] DataFrame vacío tras descargar {resource['url']}")
         return 0
 
+    # Limitar el número de registros descargados/insertados para evitar
+    # consumir demasiada memoria con recursos muy grandes. Si el valor es
+    # 0 o negativo, no se aplica límite.
+    if MAX_RECORDS_DOWNLOAD > 0 and len(df) > MAX_RECORDS_DOWNLOAD:
+        logging.info(
+            f"[{dataset_id}] Recurso limitado a {MAX_RECORDS_DOWNLOAD} filas "
+            f"de {len(df)} disponibles."
+        )
+        df = df.head(MAX_RECORDS_DOWNLOAD).copy()
+
     # Añadir columna de trazabilidad
     df["_resource_id"] = res_id
     df["_ingested_at"] = datetime.datetime.now().isoformat()
@@ -139,7 +149,15 @@ def save_dataset_content(db: Session, dataset_id: str, resource: dict) -> int:
         logging.info(f"[{dataset_id}] Tabla '{table_name}' creada.")
 
     # Insertar filas (append)
-    df.to_sql(table_name, engine, if_exists="append", index=True, index_label="_row_id")
+    df.to_sql(
+        table_name,
+        engine,
+        if_exists="append",
+        index=True,
+        index_label="_row_id",
+        chunksize=1000,
+        method="multi",
+    )
     inserted = len(df)
     logging.info(f"[{dataset_id}] {inserted} filas insertadas en '{table_name}'.")
 
