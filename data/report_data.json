@@ -42,6 +42,20 @@
     "score": 82.63
   },
   {
+    "source_id": "elhierro",
+    "name": "Cabildo de El Hierro",
+    "type": "Cabildo",
+    "last_ingestion": "2026-04-29 11:26",
+    "v": 12,
+    "r": 396425,
+    "total_resources": 38,
+    "reusable_formats": 0.25,
+    "norm_v": 100.0,
+    "norm_r": 100.0,
+    "a": 25.85,
+    "score": 70.34
+  },
+  {
     "source_id": "sitcan",
     "name": "SITCAN",
     "type": "Especializado",
@@ -68,20 +82,6 @@
     "norm_r": 1.12,
     "a": 100.0,
     "score": 58.03
-  },
-  {
-    "source_id": "elhierro",
-    "name": "Cabildo de El Hierro",
-    "type": "Cabildo",
-    "last_ingestion": "2026-04-29 10:06",
-    "v": 13,
-    "r": 397548,
-    "total_resources": 46,
-    "reusable_formats": 0.31,
-    "norm_v": 16.67,
-    "norm_r": 100.0,
-    "a": 25.77,
-    "score": 45.31
   },
   {
     "source_id": "fuerteventura",
