@@ -121,13 +121,13 @@ def save_dataset_content(db: Session, dataset_id: str, resource: dict) -> int:
         logging.warning(f"[{dataset_id}] DataFrame vacío tras descargar {resource['url']}")
         return 0
 
-    # Limitar el número de registros descargados/insertados para evitar
-    # consumir demasiada memoria con recursos muy grandes. Si el valor es
-    # 0 o negativo, no se aplica límite.
-    if MAX_RECORDS_DOWNLOAD > 0 and len(df) > MAX_RECORDS_DOWNLOAD:
+    # Limitar el número de registros descargados/insertados solo en modo debug.
+    # En ejecuciones reales no se recorta el DataFrame, aunque MAX_RECORDS_DOWNLOAD
+    # esté definido en el .env.
+    if DEBUG_MODE and MAX_RECORDS_DOWNLOAD > 0 and len(df) > MAX_RECORDS_DOWNLOAD:
         logging.info(
             f"[{dataset_id}] Recurso limitado a {MAX_RECORDS_DOWNLOAD} filas "
-            f"de {len(df)} disponibles."
+            f"de {len(df)} disponibles por DEBUG_MODE."
         )
         df = df.head(MAX_RECORDS_DOWNLOAD).copy()
 

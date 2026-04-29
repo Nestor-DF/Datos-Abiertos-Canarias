@@ -32,36 +32,36 @@ SOURCES = [
     #     "url": "https://opendata.sitcan.es",
     #     "type": "Especializado"
     # },
-     {
-         "id": "istac",
-         "name": "ISTAC",
-         "url": "https://datos.canarias.es/catalogos/estadisticas",
-         "type": "Especializado"
-     }
+    # {
+    #     "id": "istac",
+    #     "name": "ISTAC",
+    #     "url": "https://datos.canarias.es/catalogos/estadisticas",
+    #     "type": "Especializado"
+    # }
     # {
     #     "id": "tenerife",
     #     "name": "Cabildo de Tenerife",
     #     "url": "https://datos.tenerife.es/ckan",
     #     "type": "Cabildo"
     # },
-    # {
-    #     "id": "lapalma",
-    #     "name": "Cabildo de La Palma",
-    #     "url": "https://lapalmasmart-open.lapalma.es/datosabiertos/catalogo",
-    #     "type": "Cabildo"
-    # },
-    # {
-    #     "id": "elhierro",
-    #     "name": "Cabildo de El Hierro",
-    #     "url": "https://datosabiertos.elhierro.es",
-    #     "type": "Cabildo"
-    # },
-    # {
-    #     "id": "fuerteventura",
-    #     "name": "Cabildo de Fuerteventura",
-    #     "url": "https://gobiernoabierto.cabildofuer.es/datosabiertos/catalogo",
-    #     "type": "Cabildo"
-    # },
+     {
+         "id": "lapalma",
+         "name": "Cabildo de La Palma",
+         "url": "https://lapalmasmart-open.lapalma.es/datosabiertos/catalogo",
+         "type": "Cabildo"
+     },
+     {
+         "id": "elhierro",
+         "name": "Cabildo de El Hierro",
+         "url": "https://datosabiertos.elhierro.es",
+         "type": "Cabildo"
+     },
+     {
+         "id": "fuerteventura",
+         "name": "Cabildo de Fuerteventura",
+         "url": "https://gobiernoabierto.cabildofuer.es/datosabiertos/catalogo",
+         "type": "Cabildo"
+     },
     # {
     #     "id": "lpgc",
     #     "name": "Ayuntamiento de Las Palmas de Gran Canaria",

@@ -1,0 +1,58 @@
+[
+  {
+    "source_id": "istac",
+    "name": "ISTAC",
+    "type": "Especializado",
+    "last_ingestion": "2026-04-29 04:58",
+    "v": 21768,
+    "r": 9554,
+    "total_resources": 45808,
+    "reusable_formats": 1.87,
+    "norm_v": 100.0,
+    "norm_r": 100.0,
+    "a": 65.83,
+    "score": 86.33
+  },
+  {
+    "source_id": "lapalma",
+    "name": "Cabildo de La Palma",
+    "type": "Cabildo",
+    "last_ingestion": "N/A",
+    "v": 0,
+    "r": 0,
+    "total_resources": 0,
+    "reusable_formats": 0.0,
+    "norm_v": 0.0,
+    "norm_r": 0.0,
+    "a": 100.0,
+    "score": 40.0
+  },
+  {
+    "source_id": "fuerteventura",
+    "name": "Cabildo de Fuerteventura",
+    "type": "Cabildo",
+    "last_ingestion": "N/A",
+    "v": 0,
+    "r": 0,
+    "total_resources": 0,
+    "reusable_formats": 0.0,
+    "norm_v": 0.0,
+    "norm_r": 0.0,
+    "a": 100.0,
+    "score": 40.0
+  },
+  {
+    "source_id": "elhierro",
+    "name": "Cabildo de El Hierro",
+    "type": "Cabildo",
+    "last_ingestion": "N/A",
+    "v": 0,
+    "r": 0,
+    "total_resources": 0,
+    "reusable_formats": 0.0,
+    "norm_v": 0.0,
+    "norm_r": 0.0,
+    "a": 100.0,
+    "score": 40.0
+  }
+]
