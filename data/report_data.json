@@ -31,15 +31,15 @@
     "source_id": "istac",
     "name": "ISTAC",
     "type": "Especializado",
-    "last_ingestion": "2026-04-29 04:58",
-    "v": 21768,
-    "r": 9554,
-    "total_resources": 45808,
-    "reusable_formats": 1.87,
+    "last_ingestion": "2026-04-30 14:18",
+    "v": 19018,
+    "r": 45393944,
+    "total_resources": 29942,
+    "reusable_formats": 1.44,
     "norm_v": 100.0,
     "norm_r": 100.0,
-    "a": 65.83,
-    "score": 86.33
+    "a": 63.62,
+    "score": 85.45
   },
   {
     "source_id": "parlamento_canarias",
